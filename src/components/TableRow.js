@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 //import './App.css';
 
 class TableRow extends Component {
@@ -12,7 +13,9 @@ class TableRow extends Component {
       }
     rowContent.push(          
       <td key = {i}>
-        <button onClick = {this.props.editRes.bind(this,this.props.data.id)}><i className="material-icons">create</i></button>
+        <Link to={`/edit/${this.props.data.id}`}>
+          <i className="material-icons">create</i>
+        </Link>
         <button onClick = {this.props.delRes.bind(this,this.props.data.id)}><i className="material-icons">delete</i></button>  
       </td>);
     return (

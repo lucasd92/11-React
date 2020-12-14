@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TableRow from './TableRow'
-//import './App.css';
+import '../css/table.css';
 class TableFrame extends Component {
   render() {
     let head = [];
@@ -12,7 +12,7 @@ class TableFrame extends Component {
       rows.push(<TableRow data = {element} fields = {this.props.res.fields} key = {element.id} delRes = {this.props.delRes} editRes = {this.props.editRes}/>);
     });
     return (
-      <table>
+      <table className="resource-table">
         <thead>
           <tr>
             {head}

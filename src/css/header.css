@@ -1,0 +1,16 @@
+.app-header {
+  display: flex;
+  background-color: rgb(35, 47, 62);
+  align-items: center;
+  color: #FFF;
+}
+
+.app-header i {
+  padding: 15px;
+  color: #FFF;
+}
+
+.app-header p {
+  font-size: 30px;
+  margin: auto;
+}

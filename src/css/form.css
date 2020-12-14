@@ -1,0 +1,66 @@
+form {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  order: 4;
+  width: 100%;
+}
+form div {
+  min-height: 100px;
+  width: 100%;
+}
+div > label {
+  font-weight: bold;
+  font-size: 30px;
+}
+div > input{
+  width: 100%;
+  font-size: 20px;
+  padding: 5px 0px;
+  margin: 5px 0px;
+}
+input[type="submit"] {
+  width: 80%;
+}
+div > p {
+  color: red;
+  font-weight: bold;
+}
+#form-title{
+  order: 3;
+  width: 100%;
+  height: 80px;
+  text-align: center;
+  font-size: 50px;
+}
+.submit-container{
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+}
+.submit-container input{
+  font-size: 30px;
+}
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: brown;
+  padding:15px;
+  font-size: 30px;
+}
+.form-header p{
+  color: white;
+
+}
+.form-header a{
+  text-decoration: none;
+  color: white;
+}
+/* Show form in two columns*/
+@media (min-width: 768px) {
+  form div {
+      width: 47%;
+  }
+}

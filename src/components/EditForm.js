@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormField from './FormField'
-//import './App.css';
+import { Link } from 'react-router-dom';
+import '../css/form.css';
 
 class EditForm extends Component {
   onSubmit = (e) => {
@@ -10,18 +11,20 @@ class EditForm extends Component {
   render() {
     let inputs = [];
     this.props.res.fields.forEach(field => {
-      inputs.push(<FormField field = {field} key = {field.id} />);
+      inputs.push(<FormField value={this.props.data} field = {field} key = {field.id} />);
     });
     return (
       <div>
-        <div>
+        <div className="form-header">
           <p>{this.props.res.title}</p>
-          <button onClick={this.props.showForm} >X</button>
+          <Link to="/">X</Link>
         </div>
-      <form onSubmit={this.onSubmit}>
-        {inputs}
-        <input type="submit" value="Confirm"/>
-      </form>
+        <form onSubmit={this.onSubmit}>
+          {inputs}
+          <Link className="submit-container" to="/">
+            <input type="submit" value="Confirm"/>
+          </Link>
+        </form>
       </div>
     );
   }

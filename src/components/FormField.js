@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 class FormField extends Component {
   state = {
-    value:'',
+    value:this.props.value?this.props.value[0][this.props.field.id]:'',
     errorMsg: false,
     valid: false
   }
@@ -23,7 +23,7 @@ class FormField extends Component {
         <input 
           type={this.props.field.type} 
           name={this.props.field.id}  
-          placeholder="Add name"
+          placeholder="Set Value"
           value={this.state.value}
           onChange={this.onChange}
           onFocus={this.clearError}

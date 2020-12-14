@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-//import './App.css';
+import { Link } from 'react-router-dom';
+import '../css/plusbutton.css';
 
 class PlusButton extends Component {
   render() {
     return (
-      <button onClick={this.props.showAddForm}>
+      <Link className="plus-button" to="/add">
         <i className="material-icons">add_circle</i>
-      </button>
+      </Link>
     );
   }
 }

@@ -1,0 +1,15 @@
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-container i {
+  padding: 15px;
+}
+
+.search-container input {
+  width: 30%;
+  font-size: 30px;
+  border: none;
+  border-bottom: 1px #000 solid;
+}

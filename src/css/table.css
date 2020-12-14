@@ -1,0 +1,19 @@
+.resource-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+}
+.resource-table thead {
+  color: red;
+  font-size: 110%;
+  font-weight: bold;
+}
+.resource-table tr {
+  border-bottom: 1px solid #000;
+}
+.resource-table th {
+  text-align: center;
+}
+.resource-table td {
+  text-align: center;
+}
