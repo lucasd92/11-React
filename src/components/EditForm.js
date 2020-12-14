@@ -14,7 +14,7 @@ class EditForm extends Component {
       inputs.push(<FormField value={this.props.data} field = {field} key = {field.id} />);
     });
     return (
-      <div>
+      <React.Fragment>
         <div className="form-header">
           <p>{this.props.res.title}</p>
           <Link to="/">X</Link>
@@ -25,7 +25,7 @@ class EditForm extends Component {
             <input type="submit" value="Confirm"/>
           </Link>
         </form>
-      </div>
+      </React.Fragment>
     );
   }
 }
