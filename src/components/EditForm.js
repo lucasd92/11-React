@@ -6,7 +6,6 @@ import '../css/form.css';
 class EditForm extends Component {
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.showForm();
   }
   render() {
     let inputs = [];

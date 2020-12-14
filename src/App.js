@@ -74,8 +74,6 @@ class App extends Component {
     if(this.resources.length < len) this.forceUpdate();
   }
   editRes = (id) => {
-    console.log(id);
-    this.showEditForm();
   }
   render() {
     return (
@@ -87,14 +85,14 @@ class App extends Component {
               <React.Fragment>
                 <SearchBox />
                 <TableFrame data = {this.resources} res = {this.state.resources[0]} delRes = {this.delRes} editRes = {this.editRes}/>
-                <PlusButton showAddForm={this.showAddForm}/>
+                <PlusButton />
               </React.Fragment>
             )} />
             <Route exact path="/add" render={props => (
-              <EditForm res = {this.state.resources[0].addForm} showForm={this.showAddForm}/>
+              <EditForm res = {this.state.resources[0].addForm} />
             )} />
             <Route exact path="/edit/:id" render={props => (
-              <EditForm data={this.resources.filter((res) => (res.id === parseInt(props.match.params.id)) )} res = {this.state.resources[0].editForm} showForm={this.showEditForm}/>
+              <EditForm data={this.resources.filter((res) => (res.id === parseInt(props.match.params.id)) )} res = {this.state.resources[0].editForm} />
             )} />
           </div>
         </div>
