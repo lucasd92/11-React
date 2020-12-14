@@ -19,9 +19,6 @@ div > input{
   padding: 5px 0px;
   margin: 5px 0px;
 }
-input[type="submit"] {
-  width: 80%;
-}
 div > p {
   color: red;
   font-weight: bold;
@@ -41,12 +38,15 @@ div > p {
   align-items: center;
 }
 .submit-container input{
+  width: 50%;
   font-size: 30px;
+  background-color: rgb(136,0,0);
+  color: white;
 }
 .form-header {
   display: flex;
   justify-content: space-between;
-  background-color: brown;
+  background-color: rgb(136,0,0);
   padding:15px;
   font-size: 30px;
 }

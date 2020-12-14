@@ -4,7 +4,7 @@
   
 }
 .resource-table thead {
-  color: red;
+  color: rgb(136,0,0);
   font-size: 110%;
   font-weight: bold;
 }
@@ -16,4 +16,11 @@
 }
 .resource-table td {
   text-align: center;
+}
+.resource-table i {
+  color: rgb(35, 47, 62);
+}
+.resource-table button {
+  background-color: transparent;
+  border: none;
 }
