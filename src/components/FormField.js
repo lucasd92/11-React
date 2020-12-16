@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 //import './App.css';
 
 class FormField extends Component {
-  state = {
-    value:this.props.value?this.props.value[0][this.props.field.id]:'',
-    errorMsg: false,
-    valid: false
-  }
 
-  onChange = (e) => this.setState({value: e.target.value});
-  clearError = (e) => this.setState({errorMsg: false, valid: false});
+  onChange = (e) => {
+    this.props.onChange(this.props.index,e.target.value);
+  }
   validateInput = (e) => {
-    if(!this.props.field.pattern.test(e.target.value))
-      this.setState({errorMsg: true});
-    else
-      this.setState({valid: true});
+    this.props.validateInput(this.props.index,this.props.field.pattern,e.target.value)
+  }
+  clearError = (e) => {
+    this.props.clearError(this.props.index);
   }
   render() {
     return (
@@ -24,12 +20,12 @@ class FormField extends Component {
           type={this.props.field.type} 
           name={this.props.field.id}  
           placeholder="Set Value"
-          value={this.state.value}
+          value={this.props.state.value}
           onChange={this.onChange}
           onFocus={this.clearError}
           onBlur={this.validateInput}
         />
-        {this.state.errorMsg && <p>{this.props.field.onError}</p>}
+        {this.props.state.errorMsg && <p>{this.props.field.onError}</p>}
       </div>
     );
   }

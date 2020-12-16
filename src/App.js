@@ -89,10 +89,16 @@ class App extends Component {
               </React.Fragment>
             )} />
             <Route exact path="/add" render={props => (
-              <EditForm res = {this.state.resources[0].addForm} />
+              <EditForm 
+                res = {this.state.resources[0].addForm}
+                
+              />
             )} />
             <Route exact path="/edit/:id" render={props => (
-              <EditForm data={this.resources.filter((res) => (res.id === parseInt(props.match.params.id)) )} res = {this.state.resources[0].editForm} />
+              <EditForm 
+                data={this.resources.filter((res) => (res.id === parseInt(props.match.params.id)) )}
+                res={this.state.resources[0].editForm} 
+              />
             )} />
           </div>
         </div>
