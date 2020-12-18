@@ -11,7 +11,7 @@ class TableRow extends Component {
             rowContent.push(<td key = {i}>{this.props.data[key]}</td>);
           i++;
       }
-    rowContent.push(          
+    rowContent.push(
       <td key = {i}>
         <Link to={`/edit/${this.props.data.id}`}>
           <i className="material-icons">create</i>

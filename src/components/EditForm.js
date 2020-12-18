@@ -18,7 +18,7 @@ class EditForm extends Component {
       obj => (obj.index === index ? Object.assign(obj, {value: value}) :obj)
     )
   }));
-  clearError = (index) => {     
+  clearError = (index) => {
     this.setState(prevState => ({
       value: prevState.value.map(
       obj => (obj.index === index ? Object.assign(obj, {errorMsg: false}) :obj)
@@ -34,10 +34,10 @@ class EditForm extends Component {
         return false;
     }
     else{
-     this.setState(prevState => ({
-      value: prevState.value.map(
-        obj => (obj.index === index ? Object.assign(obj, {errorMsg: false}) :obj)
-      )}));
+      this.setState(prevState => ({
+        value: prevState.value.map(
+          obj => (obj.index === index ? Object.assign(obj, {errorMsg: false}) :obj)
+        )}));
       return true;
     }
   }
@@ -49,19 +49,18 @@ class EditForm extends Component {
       pattern = this.props.res.fields.filter( field => field.id === input.id);
       valid = valid & this.validateInput(input.index,pattern[0].pattern,input.value);
     });
-    
-    console.log(valid);
-    console.log(this.props.data?this.props.data[0].id:-1);
+    if(valid)
+      this.props.editRes(this.props.data?this.props.data[0].id:-1,this.state.value);
   }
   render() {
     let inputs = [];
     this.props.res.fields.forEach((field,index) => {
-      inputs.push(<FormField 
+      inputs.push(<FormField
                     state={this.state.value[index]}
                     value={this.props.data}
                     field = {field}
-                    index = {this.state.value[index].index} 
-                    key = {this.state.value[index].index} 
+                    index = {this.state.value[index].index}
+                    key = {this.state.value[index].index}
                     onChange={this.onChange}
                     clearError={this.clearError}
                     validateInput={this.validateInput}
@@ -75,10 +74,9 @@ class EditForm extends Component {
         </div>
         <form onSubmit={this.onSubmit}>
           {inputs}
-          {/* <Link className="submit-container" to="/">
+          <div className="submit-container">
             <input type="submit" value="Confirm"/>
-          </Link> */}
-          <input type="submit" value="Confirm"/>
+          </div>
         </form>
       </React.Fragment>
     );

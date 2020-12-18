@@ -12,14 +12,14 @@ import EditForm from './components/EditForm'
 class App extends Component {
   resources = technicians;
   state = {
-    resources: 
+    resources:
     [
       {
         id: 1,
         title: 'Technicians',
         data: technicians,
-        fields: 
-          [
+        fields:
+          [//Order matters
             'Rol',
             'Email',
             'Full Name',
@@ -34,33 +34,35 @@ class App extends Component {
           editForm:
           {
             title: 'Edit technician',
-            fields: 
-            [ 
+            fields:
+            [
               {id:'rol',type: 'text', name:'Rol', onError:'Must have at least 3 characters', pattern: /^[a-z]{3,}$/i},
-              {id:'fullname',type: 'text', name:'Full Name', onError:'At least 6 characters. Ex: John Doe', pattern: /^([a-z]{2,}[\s]+)+([a-z]{2,})$/i},
               {id:'email',type: 'email', name:'Email', onError:'Invalid email', pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/},
+              {id:'fullname',type: 'text', name:'Full Name', onError:'At least 6 characters. Ex: John Doe', pattern: /^([a-z]{2,}[\s]+)+([a-z]{2,})$/i},
               {id:'phone',type: 'number', name:'Phone Number', onError:'Must have at least 8 digits', pattern: /^[0-9]{8,}$/},
               {id:'address',type: 'text', name:'Address', onError:'Must have at least 5 characters with numbers and letters', pattern: /^([a-z0-9]{2,}[\s]+)+([0-9]+)$/i},
+              {id:'boiler',type: 'text', name:'Boilers', onError:'Must have at least 1 characters', pattern: /^[a-z;,]{1,}$/i},
+              {id:'capabilities',type: 'text', name:'Capabilities', onError:'Must have at least 3 characters', pattern: /^[a-z]{1,}$/i},
               {id:'hour_rate',type: 'number', name:'Hour Rate', onError:'Must have at least 1 digits', pattern: /^[0-9]{1,}$/},
               {id:'daily_capacity',type: 'number', name:'Daily Capacity', onError:'Must have at least 1 digits', pattern: /^[0-9]{1,}$/},
-              {id:'capabilities',type: 'text', name:'Capabilities', onError:'Must have at least 3 characters', pattern: /^[a-z]{1,}$/i},
             ]
           },
           addForm:
           {
-            title: 'Add new technician',
-            fields: 
-            [ 
+            title: 'Add new technician' ,
+            fields:
+            [
               {id:'rol',type: 'text', name:'Rol', onError:'Must have at least 3 characters', pattern: /^[a-z]{3,}$/i},
-              {id:'name',type: 'text', name:'Full Name', onError:'At least 6 characters. Ex: John Doe', pattern: /^([a-z]{2,}[\s]+)+([a-z]{2,})$/i},
               {id:'email',type: 'email', name:'Email', onError:'Invalid email', pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/},
+              {id:'fullname',type: 'text', name:'Full Name', onError:'At least 6 characters. Ex: John Doe', pattern: /^([a-z]{2,}[\s]+)+([a-z]{2,})$/i},
               {id:'phone',type: 'number', name:'Phone Number', onError:'Must have at least 8 digits', pattern: /^[0-9]{8,}$/},
               {id:'address',type: 'text', name:'Address', onError:'Must have at least 5 characters with numbers and letters', pattern: /^([a-z0-9]{2,}[\s]+)+([0-9]+)$/i},
-              {id:'hourrate',type: 'number', name:'Hour Rate', onError:'Must have at least 1 digits', pattern: /^[0-9]{1,}$/},
-              {id:'daylycapacity',type: 'number', name:'Daily Capacity', onError:'Must have at least 1 digits', pattern: /^[0-9]{1,}$/},
+              {id:'boiler',type: 'text', name:'Boilers', onError:'Must have at least 1 characters', pattern: /^[a-z;,]{1,}$/i},
               {id:'capabilities',type: 'text', name:'Capabilities', onError:'Must have at least 3 characters', pattern: /^[a-z]{1,}$/i},
+              {id:'hour_rate',type: 'number', name:'Hour Rate', onError:'Must have at least 1 digits', pattern: /^[0-9]{1,}$/},
+              {id:'daily_capacity',type: 'number', name:'Daily Capacity', onError:'Must have at least 1 digits', pattern: /^[0-9]{1,}$/},
             ]
-          } 
+          }
       },
       {
         id: 2,
@@ -73,7 +75,24 @@ class App extends Component {
     this.resources = this.resources.filter((res) => (res.id !== parseInt(id)) );
     if(this.resources.length < len) this.forceUpdate();
   }
-  editRes = (id) => {
+  editRes = (id,fields) => {
+    if(id === -1){
+      let newRes = {};
+      fields.forEach( (field) => {
+        newRes[field.id] = field.value;
+      });
+      newRes['id'] = Math.round(100000 * Math.random());
+      this.resources.push(newRes);
+    }
+    else{
+      this.resources.forEach((res) => {
+        if(res.id === id){
+          fields.forEach( (field) => {
+            res[field.id] = field.value;
+          });
+        }
+      })
+    }
   }
   render() {
     return (
@@ -89,15 +108,16 @@ class App extends Component {
               </React.Fragment>
             )} />
             <Route exact path="/add" render={props => (
-              <EditForm 
+              <EditForm
                 res = {this.state.resources[0].addForm}
-                
+                editRes={this.editRes}
               />
             )} />
             <Route exact path="/edit/:id" render={props => (
-              <EditForm 
+              <EditForm
                 data={this.resources.filter((res) => (res.id === parseInt(props.match.params.id)) )}
-                res={this.state.resources[0].editForm} 
+                res={this.state.resources[0].editForm}
+                editRes={this.editRes}
               />
             )} />
           </div>
