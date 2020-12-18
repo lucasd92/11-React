@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormField from './FormField'
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router";
 import '../css/form.css';
 
 class EditForm extends Component {
@@ -51,6 +52,7 @@ class EditForm extends Component {
     });
     if(valid)
       this.props.editRes(this.props.data?this.props.data[0].id:-1,this.state.value);
+    this.props.history.push('/');
   }
   render() {
     let inputs = [];
@@ -83,4 +85,4 @@ class EditForm extends Component {
   }
 }
 
-export default EditForm;
+export default withRouter(EditForm);
